@@ -18,8 +18,8 @@
       "matches": [
         "https://www.reddit.com/*",
         "https://www.amazon.ca/*",
-        "https://www.netflix.com/ca/",
-        "https://www.youtube.com/*",
+        "https://www.netflix.com/ca/*",
+        "https://www.youtube.com/*"
       ],
       "js": [
         "content.js"
