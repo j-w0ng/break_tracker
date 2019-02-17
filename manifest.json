@@ -1,0 +1,33 @@
+{
+  "name": "Break Tacker Extension",
+  "description" : "Keeps track of duration of breaks",
+  "version": "1.0",
+  "manifest_version": 2, 
+  "browser_action": {
+    "default_popup": "buttons.html",
+    "default_icon": {
+      "32": "images/clockicon32.png",
+      "16": "images/clockicon16.png"
+    }
+  }, 
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.reddit.com/*",
+        "https://www.amazon.ca/*",
+        "https://www.netflix.com/ca/",
+        "https://www.youtube.com/*",
+        "https://shiffman.net/a2z/chrome-ext/"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}
+
