@@ -1,6 +1,6 @@
 {
   "name": "Break Tacker Extension",
-  "description" : "Keeps track of duration of breaks",
+  "description" : "15 minute break time, keeps track of number of breaks",
   "version": "1.0",
   "manifest_version": 2, 
   "browser_action": {
@@ -10,6 +10,9 @@
       "16": "images/clockicon16.png"
     }
   }, 
+  "permissions": [
+    "alarms"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -17,7 +20,6 @@
         "https://www.amazon.ca/*",
         "https://www.netflix.com/ca/",
         "https://www.youtube.com/*",
-        "https://shiffman.net/a2z/chrome-ext/"
       ],
       "js": [
         "content.js"
