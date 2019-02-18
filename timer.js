@@ -1,6 +1,5 @@
 chrome.runtime.sendMessage({method:"getClicks"},function(response){
   document.getElementById("breakCounter").innerHTML = "Total Breaks: " + response;
-  console.log(response);
 });
 
 var timer = {
@@ -24,18 +23,20 @@ var timer = {
       window.close();
   },
 
-  extensionStart : function(e) {
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
-      var activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, {"message": "turnOn"});
-    });
-    window.close();
-  },
+  // extensionStart : function(e) {
+  //   chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
+  //     var activeTab = tabs[0];
+  //     console.log("turnON");
+  //     chrome.tabs.sendMessage(activeTab.id, {"message": "turnBreakTrackerOn"});
+  //   });
+  //   window.close();
+  // },
 
   extensionOff : function(e) {
+    chrome.alarms.clear("startTimer");
     chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
       var activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, {"message": "turnOff"});
+      chrome.tabs.sendMessage(activeTab.id, {"message": "turnBreakTrackerOff"});
     });
     window.close();
   },
@@ -46,9 +47,9 @@ var timer = {
       t.addEventListener("click",  timer.onHandler );
       var t = document.getElementById("timerEnd");
       t.addEventListener("click",  timer.offHandler );
-      var t = document.getElementById("turnOn");
-      t.addEventListener("click",  timer.extensionStart);
-      var t = document.getElementById("turnOff");
+      // var t = document.getElementById("turnBreakTrackerOn");
+      // t.addEventListener("click",  timer.extensionStart);
+      var t = document.getElementById("turnBreakTrackerOff");
       t.addEventListener("click",  timer.extensionOff );
   }
 };
