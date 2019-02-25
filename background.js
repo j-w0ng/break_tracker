@@ -1,4 +1,5 @@
 var clicks = 0;
+var extensionStatus = false;
 
 chrome.runtime.onMessage.addListener(function updateClicks(msg, sender, sendResponse) {
         console.log(msg.message);
@@ -10,13 +11,38 @@ chrome.runtime.onMessage.addListener(function updateClicks(msg, sender, sendResp
     }
 );
 
+chrome.runtime.onMessage.addListener(function updateClicks(msg, sender, sendResponse) {
+  console.log(msg.message);
+  console.log(clicks);
+  if (msg.message === "turnOnExtension") 
+  {
+      extensionStatus = true;
+  }
+}
+);
+
+chrome.runtime.onMessage.addListener(function updateClicks(msg, sender, sendResponse) {
+  console.log(msg.message);
+  console.log(clicks);
+  if (msg.message === "turnOffExtension") 
+  {
+    extensionStatus = false;
+  }
+}
+);
+
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method === "getClicks"){
       sendResponse(clicks);
     }
   });
-  
 
+  chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
+    if(message.method === "statusUpdate"){
+      sendResponse(extensionStatus);
+    }
+  });
+  
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
     chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
