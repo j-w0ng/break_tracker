@@ -58,6 +58,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 
   chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method === "breakStatus"){
+      console.log(onBreak);
       sendResponse(onBreak);
     }
   });
@@ -67,7 +68,7 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
     chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
         var activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, {"message": "breakEnd"});
-        breakStatus = false;
+        onBreak = false;
       });
     alert("Break Over");
 });

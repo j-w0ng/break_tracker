@@ -1,10 +1,11 @@
 console.log("LOGGING");
 
 window.onload = function() {
-    var onBreak = false;
+    var onBreak = true;
     chrome.runtime.sendMessage({method:"breakStatus"},function(response){
         onBreak = response;
-    }),
+    });
+    console.log(onBreak);
     chrome.runtime.sendMessage({method:"statusUpdate"},function(response){
         if (response && !onBreak) {
             let paragraph = document.getElementsByTagName("p");

@@ -10,7 +10,7 @@ var timer = {
         var activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, {"message": "breakStart"});
         chrome.runtime.sendMessage({message: "updateCounter"});
-        chrome.tabs.sendMessage(activeTab.id, {"message": "breakBegin"});
+        chrome.runtime.sendMessage({message: "breakBegin"});
       });
       window.close();
   },
@@ -20,7 +20,7 @@ var timer = {
       chrome.tabs.query({currentWindow: true, active: true}, function (tabs){
         var activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, {"message": "breakEnd"});
-        chrome.tabs.sendMessage(activeTab.id, {"message": "breakOver"});
+        chrome.runtime.sendMessage({message: "breakOver"});
       });
       window.close();
   },
@@ -31,7 +31,7 @@ var timer = {
       console.log("turnON");
       chrome.tabs.sendMessage(activeTab.id, {"message": "turnBreakTrackerOn"});
       chrome.runtime.sendMessage({message: "turnOnExtension"});
-      chrome.tabs.sendMessage(activeTab.id, {"message": "breakEnd"});
+      chrome.runtime.sendMessage({message: "breakOver"});
     });
     window.close();
   },
@@ -42,6 +42,7 @@ var timer = {
       var activeTab = tabs[0];
       chrome.tabs.sendMessage(activeTab.id, {"message": "turnBreakTrackerOff"});
       chrome.runtime.sendMessage({message: "turnOffExtension"});
+      chrome.runtime.sendMessage({message: "breakBegin"});
     });
     window.close();
   },
