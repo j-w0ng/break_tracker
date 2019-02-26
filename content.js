@@ -1,26 +1,30 @@
 console.log("LOGGING");
 
 window.onload = function() {
-chrome.runtime.sendMessage({method:"statusUpdate"},function(response){
-    if (response) {
-        let paragraph = document.getElementsByTagName("p");
-        for (elt of paragraph) {
-            elt.style["color"] = "#FFFFFF";
+    var onBreak = false;
+    chrome.runtime.sendMessage({method:"breakStatus"},function(response){
+        onBreak = response;
+    }),
+    chrome.runtime.sendMessage({method:"statusUpdate"},function(response){
+        if (response && !onBreak) {
+            let paragraph = document.getElementsByTagName("p");
+            for (elt of paragraph) {
+                elt.style["color"] = "#FFFFFF";
+            }
+            let header2 = document.getElementsByTagName("h2");
+            for (elt of header2) {
+                elt.style["color"] = "#FFFFFF";
+            }
+            let header3 = document.getElementsByTagName("h3");
+            for (elt of header3) {
+                elt.style["color"] = "#FFFFFF";
+            }
+            let header4 = document.getElementsByTagName("h4");
+            for (elt of header4) {
+                elt.style["color"] = "#FFFFFF";
+            }
         }
-        let header2 = document.getElementsByTagName("h2");
-        for (elt of header2) {
-            elt.style["color"] = "#FFFFFF";
-        }
-        let header3 = document.getElementsByTagName("h3");
-        for (elt of header3) {
-            elt.style["color"] = "#FFFFFF";
-        }
-        let header4 = document.getElementsByTagName("h4");
-        for (elt of header4) {
-            elt.style["color"] = "#FFFFFF";
-        }
-    }
-})
+    })
 }
 
 chrome.runtime.onMessage.addListener(
